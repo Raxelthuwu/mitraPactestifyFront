@@ -1,0 +1,13 @@
+node_modules/
+dist/
+
+.env.example
+.env.local
+.env.*.local
+
+PROJECT.md
+DESIGN.md
+.agents/
+skills-lock.json
+
+assets/*.eps
