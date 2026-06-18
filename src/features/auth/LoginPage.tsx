@@ -97,13 +97,6 @@ export function LoginPage() {
           <Button type="submit" disabled={submitting}>
             {submitting ? 'Validando ingreso' : 'Ingresar'}
           </Button>
-          <div className="demo-access" aria-label="Credenciales de prueba">
-            <strong>Prueba rápida</strong>
-            <span>Testigo: testigo@demo.com</span>
-            <span>Abogado: abogado@demo.com</span>
-            <span>Ocupada: ocupada@demo.com u ocupado@demo.com</span>
-            <span>Cédula 123456789 · Clave demo123</span>
-          </div>
         </form>
       </section>
     </main>

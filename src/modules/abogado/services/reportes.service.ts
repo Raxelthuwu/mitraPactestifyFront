@@ -1,10 +1,7 @@
 import { endpoints } from '../../../core/api/endpoints'
 import { httpClient } from '../../../core/api/httpClient'
-import { mockApi } from '../../../core/api/mockApi'
 import type { Severity } from '../../../core/types/api.types'
 import type { Reporte } from '../../../core/types/domain.types'
-
-const useMocks = import.meta.env.VITE_USE_MOCKS === 'true'
 
 type ReportesResponse = {
   status: number
@@ -13,7 +10,6 @@ type ReportesResponse = {
 
 export const reportesService = {
   async getByMesa(table: number): Promise<Reporte[]> {
-    if (useMocks) return mockApi.getReports(table)
     const { data } = await httpClient.get<ReportesResponse>(endpoints.placeReports, { params: { table } })
     if (data.status !== 200 || !data.reports) throw new Error('No se pudieron cargar los reportes.')
     return data.reports.map((report, index) => ({

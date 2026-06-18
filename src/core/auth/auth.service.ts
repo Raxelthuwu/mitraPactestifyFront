@@ -1,11 +1,9 @@
 import { AxiosError } from 'axios'
 import { endpoints } from '../api/endpoints'
 import { httpClient } from '../api/httpClient'
-import { mockApi } from '../api/mockApi'
 import type { LoginRequest, LoginResponse } from '../types/api.types'
 import type { User } from '../types/user.types'
 
-const useMocks = import.meta.env.VITE_USE_MOCKS === 'true'
 
 type BackendUserResponse = {
   status: number
@@ -18,14 +16,11 @@ type BackendUserResponse = {
 }
 
 export async function loginRequest(payload: LoginRequest): Promise<LoginResponse> {
-  if (useMocks) return mockApi.login(payload)
   const { data } = await httpClient.post<LoginResponse>(endpoints.login, payload)
   return data
 }
 
-export async function getCurrentUserRequest(token: string): Promise<User> {
-  if (useMocks) return mockApi.getUser(token)
-
+export async function getCurrentUserRequest(): Promise<User> {
   try {
     const { data } = await httpClient.get<BackendUserResponse>(endpoints.user)
     return normalizeUser(data)
@@ -39,7 +34,6 @@ export async function getCurrentUserRequest(token: string): Promise<User> {
 }
 
 export async function logoutRequest() {
-  if (useMocks) return mockApi.logout()
   return httpClient.post(endpoints.logout)
 }
 

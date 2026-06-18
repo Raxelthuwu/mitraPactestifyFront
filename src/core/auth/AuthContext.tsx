@@ -43,7 +43,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
       }
 
       tokenStorage.set(response.token)
-      const currentUser = await getCurrentUserRequest(response.token)
+      const currentUser = await getCurrentUserRequest()
       setToken(response.token)
       setUser(currentUser)
       setStatus('authenticated')
@@ -59,7 +59,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     }
 
     let active = true
-    getCurrentUserRequest(existingToken)
+    getCurrentUserRequest()
       .then((currentUser) => {
         if (!active) return
         setToken(existingToken)

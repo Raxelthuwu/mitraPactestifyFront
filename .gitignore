@@ -1,13 +1,17 @@
 node_modules/
 dist/
 
-.env.example
 .env.local
 .env.*.local
 
 PROJECT.md
 DESIGN.md
 .agents/
+.codex/
 skills-lock.json
 
 assets/*.eps
+
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts

@@ -1,14 +1,10 @@
 import { endpoints } from '../../../core/api/endpoints'
 import { httpClient } from '../../../core/api/httpClient'
-import { mockApi } from '../../../core/api/mockApi'
 
-const useMocks = import.meta.env.VITE_USE_MOCKS === 'true'
 
 export const exportService = {
   async descargarExcel(puesto: string, mesa: number) {
-    const result = useMocks
-      ? await mockApi.exportReports(puesto, mesa)
-      : await httpClient
+    const result = await httpClient
           .get<Blob>(endpoints.exportReports, {
             params: { puesto, mesa, Puesto: puesto, Mesa: mesa },
             responseType: 'blob',
