@@ -17,7 +17,7 @@ export function VerReportesPage() {
   const { logout } = useAuth()
   const location = useLocation()
   const state = (location.state ?? {}) as ReportesLocationState
-  const { data: reportes = [], isLoading, isError, refetch, isFetching } = useReportes(state.mesa ?? null)
+  const { data: reportes = [], isLoading, isError, refetch, isFetching } = useReportes(state.puesto ?? null, state.mesa ?? null)
 
   if (!state.puesto || !state.mesa) return <Navigate to="/abogado" replace />
 

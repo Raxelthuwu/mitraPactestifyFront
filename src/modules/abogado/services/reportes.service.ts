@@ -12,12 +12,14 @@ type ReportesResponse = {
 }
 
 export const reportesService = {
-  async getByMesa(table: number): Promise<Reporte[]> {
-    if (useMocks) return mockApi.getReports(table)
-    const { data } = await httpClient.get<ReportesResponse>(endpoints.placeReports, { params: { table } })
+  async getByPuestoMesa(puesto: string, mesa: number): Promise<Reporte[]> {
+    if (useMocks) return mockApi.getReports(mesa)
+    const { data } = await httpClient.get<ReportesResponse>(endpoints.placeReports, {
+      params: { puesto, mesa, Puesto: puesto, Mesa: mesa },
+    })
     if (data.status !== 200 || !data.reports) throw new Error('No se pudieron cargar los reportes.')
     return data.reports.map((report, index) => ({
-      id: report.id ?? `${table}-${index}`,
+      id: report.id ?? `${puesto}-${mesa}-${index}`,
       text: report.text ?? report.Repord ?? '',
       severity: normalizeSeverity(report.severity ?? report.Problem_Grade),
       testigo: report.testigo,
