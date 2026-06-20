@@ -4,6 +4,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
-    target: ['es2015', 'chrome49', 'firefox44', 'safari10', 'edge18'],
+    target: ['es2018', 'chrome63', 'firefox67', 'safari12', 'edge79'],
   },
 })
