@@ -43,10 +43,18 @@ function normalizeUser(response: BackendUserResponse): User {
     throw new Error('No se pudo cargar la información del usuario.')
   }
 
+  const roleMap: Record<string, User['role']> = {
+    testigo: 'TESTIGO',
+    abogado: 'Abogado',
+    coordinador: 'Coordinador',
+    admin: 'Abogado',
+  }
+
   return {
     name: user.name,
-    role: user.role,
-    puestoVotacion: user['Puesto de votacion'],
-    mesas: user.Mesas,
+    role: roleMap[(user.role as string).toLowerCase()] ?? user.role,
+    puestoVotacion: user['Puesto de votacion'] ?? (user as any).name_place,
+    mesas: user.Mesas ?? (user as any).cuantity_tables,
   }
 }
+
